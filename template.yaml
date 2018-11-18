@@ -6,42 +6,23 @@ Resources:
   Function:
     Type: 'AWS::Serverless::Function'
     Properties:
+      Description: 'For any Cloudwatch Log Group that does not already have a retention policy, add a 1-week policy to help save on log costs.'
       Handler: index.handler
       Runtime: nodejs8.10
       CodeUri: ./src
       MemorySize: 128
       Timeout: 60
-      Role:
-        'Fn::GetAtt':
-          - LambdaRole
-          - Arn
-      Description: ''
       Events:
         Timer:
           Type: Schedule
           Properties:
             Schedule: rate(24 hours)
-
-  LambdaRole:
-    Type: 'AWS::IAM::Role'
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service:
-                - lambda.amazonaws.com
-            Action:
-              - 'sts:AssumeRole'
-      Path: /
       Policies:
-        - PolicyName: root
-          PolicyDocument:
-            Version: '2012-10-17'
-            Statement:
-              - Effect: Allow
-                Action:
-                  - 'logs:describe*'
-                  - 'logs:putRetentionPolicy'
-                Resource: '*'
+        - AWSLambdaExecute # Managed Policy
+        - Version: '2012-10-17' # Policy Document
+          Statement:
+          - Effect: Allow
+            Action:
+            - 'logs:describe*'
+            - 'logs:putRetentionPolicy'
+            Resource: '*'
