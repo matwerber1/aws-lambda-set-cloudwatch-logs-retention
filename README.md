@@ -1,6 +1,10 @@
 # aws-lambda-set-cloudwatch-logs-retention
 
-This NodeJS Lambda function adds a retention policy of 14 days to any CloudWatch log group that does *not* already have an existing policy. This is done as a cost-saving measure to stop you from paying for uneccessary log storage. Of course, whether and for how long logs should be kept depends on your specific use case. The 30-day period is configurable by modifying a variable within the Lambda function code before deploying.
+This NodeJS Lambda function adds a retention policy of 14 days to any CloudWatch log group that does *not* already have an existing policy.
+This is done as a cost-saving measure to stop you from paying for uneccessary log storage. 
+
+Of course, whether and for how long logs should be kept depends on your specific use case. The retention period is configurable by modifying 
+a variable within the Lambda function code before deploying.
 
 # Infrastructure
 
