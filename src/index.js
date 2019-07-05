@@ -56,9 +56,9 @@ async function getLogGroups() {
       logGroups.storedBytes += logGroup.storedBytes;
     }
     
-    params.NextToken = response.NextToken || undefined;
+    params.nextToken = response.nextToken || undefined;
     
-  } while (params.NextToken !== undefined);
+  } while (params.nextToken !== undefined);
   
   // just for informational purposes, show the size of the storage for each group. 
   logGroups.storedMegabytes = logGroups.storedBytes / 1000000;
